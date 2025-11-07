@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+
+  <div class="header-section">
+    <h2>Dashboard NPS</h2>
+    <button (click)="logout()" class="logout-button">Cerrar Sesión</button>
+  </div>
+
+  <app-survey-form (surveySubmitted)="handleSurveySubmit($event)"></app-survey-form>
+
+  <div class="stats-overview">
+
+    <!-- Tarjeta del NPS Total -->
+    <div class="stat-card nps-total-score">
+      <h3>Net Promoter Score (Global)</h3>
+      <p class="stat-value">65</p> <!-- Valor de ejemplo -->
+    </div>
+
+    <!-- Tarjetas de desglose de clientes -->
+    <div class="stat-card promoters">
+      <h3>Promotores</h3>
+      <p class="stat-value">45%</p>
+    </div>
+    <div class="stat-card neutrals">
+      <h3>Neutros</h3>
+      <p class="stat-value">30%</p>
+    </div>
+    <div class="stat-card detractors">
+      <h3>Detractores</h3>
+      <p class="stat-value">25%</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+      <h3>Encuestas Recientes</h3>
+      <!-- Aquí iría una tabla o lista de las encuestas realizadas -->
+      <p>Aún no hay datos de encuestas disponibles.</p>
+  </div>
+
+</div>

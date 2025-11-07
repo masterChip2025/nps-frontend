@@ -1,0 +1,35 @@
+<div class="survey-card" *ngIf="!submitted">
+  <p class="question">
+    <strong>¿Cuán probable es que recomiende el producto o servicio a un familiar o amigo?</strong>
+  </p>
+
+  <div class="rating-bar">
+    <!-- Iteramos sobre los números del 0 al 10 -->
+    <button
+      *ngFor="let rating of ratings"
+      class="rating-button"
+      [class.selected]="isHighlighted(rating)"
+      (click)="selectRating(rating)"
+      (mouseenter)="onMouseEnter(rating)"
+      (mouseleave)="onMouseLeave()"
+      [attr.aria-label]="'Calificar con ' + rating"
+    >
+      {{ rating }}
+    </button>
+  </div>
+
+  <div class="labels">
+    <span>Muy improbable (0)</span>
+    <span class="right-label">Definitivamente lo recomendaría (10)</span>
+  </div>
+
+  <button class="submit-button" (click)="submitSurvey()" [disabled]="selectedRating === null">
+    Enviar Calificación
+  </button>
+</div>
+
+<div class="thank-you-message" *ngIf="submitted">
+    <h3>¡Gracias por tu respuesta!</h3>
+    <p>Hemos registrado tu calificación de {{ selectedRating }} puntos.</p>
+</div>
+

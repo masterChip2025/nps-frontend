@@ -1,0 +1,43 @@
+.login-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

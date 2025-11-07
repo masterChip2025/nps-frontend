@@ -1,0 +1,97 @@
+.dashboard-container {
+    padding: 30px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px auto;
+    background-color: var(--card-bg); /* Blanco */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado y título */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Botón de cerrar sesión */
+.logout-button {
+    background-color: #6c757d; /* Gris oscuro */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #5a6268;
+}
+
+/* Contenedor de estadísticas principales (NPS Score y desglose) */
+.stats-overview {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Tarjetas de estadísticas individuales */
+.stat-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    flex: 1;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.stat-value {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Colores específicos para el desglose de clientes */
+.promoters .stat-value { color: #28a745; } /* Verde */
+.neutrals .stat-value { color: #ffc107; }   /* Amarillo */
+.detractors .stat-value { color: #dc3545; } /* Rojo */
+
+/* Estilo para la tarjeta principal del NPS Total */
+.nps-total-score {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nps-total-score h3 {
+    color: white;
+}
+
+/* Sección de contenido secundario (ej. lista de encuestas) */
+.content-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
