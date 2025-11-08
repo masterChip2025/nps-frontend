@@ -35,17 +35,15 @@
     font-size: 16px;
 }
 
-/* Animación y color cuando se selecciona o pasa el mouse */
 .rating-button.selected {
     background-color: var(--primary-color, #0056b3);
     color: white;
     border-color: var(--primary-color, #0056b3);
-    transform: scale(1.1); /* Efecto de crecimiento al seleccionar */
+    transform: scale(1.1);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .rating-button:hover {
-     /* Asegura que el hover funcione bien con o sin selección */
     background-color: var(--primary-color, #0056b3);
     color: white;
 }

@@ -22,7 +22,6 @@ export class DashboardComponent {
   handleSurveySubmit(rating: number): void {
     console.log("Calificación recibida en el dashboard:", rating);
     this.hasResponded = true;
-    // Aquí es donde llamarías a tu AuthService o a otro servicio para enviar el dato al backend.
-    // ej: this.surveyService.saveResponse(rating).subscribe(...);
+    // this.surveyService.saveResponse(rating).subscribe(...);
   }
 }

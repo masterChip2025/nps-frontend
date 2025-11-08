@@ -1,6 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+
 :root {
-    --primary-color: #0056b3; /* Azul para botones */
+    --primary-color: #0056b3;
     --background-color: #f4f4f9;
     --card-bg: #ffffff;
     --text-color: #333;
@@ -19,7 +19,6 @@ body {
     min-height: 100vh;
 }
 
-/* Estilos básicos para formularios y botones */
 input[type="email"],
 input[type="password"],
 button {
@@ -28,7 +27,7 @@ button {
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 4px;
-    box-sizing: border-box; /* Asegura que el padding no añada ancho extra */
+    box-sizing: border-box;
 }
 
 input {

@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth'; // Reemplaza con tu URL de backend
+  private apiUrl = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -34,7 +35,26 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('authToken');
-    // En un proyecto real, se debería validar la expiración del token aquí
-    return !!token;
+    return !!token && !this.isTokenExpired(token);
   }
+
+  isTokenExpired(token: string): boolean {
+    if (!token) {
+      return true;
+    }
+
+    try {
+      const decodedToken: { exp: number } = jwtDecode(token);
+
+      const expirationDate: number = decodedToken.exp;
+
+      const currentTime = new Date().getTime() / 1000;
+
+      return expirationDate < currentTime;
+
+    } catch (Error) {
+      return true;
+    }
+  }
+
 }
