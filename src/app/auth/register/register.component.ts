@@ -11,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  userData = { email: '', password: '' };
+  userData = { username: '', password: '', name: '', role:'votante' };
 
   constructor(private authService: AuthService, private router: Router) {}
 

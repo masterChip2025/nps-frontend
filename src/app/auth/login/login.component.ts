@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  credentials = { email: '', password: '' };
+  credentials = { username: '', password: '' };
   errorMessage: string | null = null;
 
   constructor(private authService: AuthService) {}
@@ -19,7 +19,6 @@ export class LoginComponent {
   onSubmit(): void {
     this.authService.login(this.credentials).subscribe({
       next: () => {
-        // Redirección manejada dentro del servicio tras éxito
       },
       error: (err) => {
         this.errorMessage = 'Error al iniciar sesión. Verifica tus credenciales.';

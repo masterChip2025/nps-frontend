@@ -4,17 +4,18 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { LOGIN_URL, REGISTER_URL } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = LOGIN_URL;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post<any>(`${this.apiUrl}/Login`, credentials).pipe(
       tap(response => {
         if (response && response.token) {
           localStorage.setItem('authToken', response.token);
@@ -25,7 +26,7 @@ export class AuthService {
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, userData);
+    return this.http.post<any>(`${REGISTER_URL}`, userData);
   }
 
   logout(): void {
