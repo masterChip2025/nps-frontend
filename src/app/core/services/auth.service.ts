@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { LOGIN_URL, REGISTER_URL } from '../../shared/constants';
@@ -26,7 +26,8 @@ export class AuthService {
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post<any>(`${REGISTER_URL}`, userData);
+    return this.http.post<any>(`${REGISTER_URL}`, userData)
+    .pipe(catchError(this.handleError));
   }
 
   logout(): void {
@@ -56,6 +57,37 @@ export class AuthService {
     } catch (Error) {
       return true;
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocurrió un error desconocido del servidor.';
+    const backendErrorText = error.error;
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // console.error(`Backend returned code ${error.status}, body was: `, backendErrorText.errors);
+      if(backendErrorText.errors.Name)
+      {
+        console.error(`Backend returned code ${error.status}, body was: `, backendErrorText.errors.Name[0]);
+        errorMessage = backendErrorText.errors.Name[0];
+      }
+      if(backendErrorText.errors.Password)
+      {
+        console.error(`Backend returned code ${error.status}, body was: `, backendErrorText.errors.Password[0]);
+        errorMessage = backendErrorText.errors.Password[0];
+      }
+      // Error JSON
+      if (error.error && error.error.message) {
+        errorMessage = error.error.message;
+      } else if (typeof error.error === 'string') {
+        errorMessage = backendErrorText;
+      }
+    }
+    return throwError(() => new Error(errorMessage));
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
   }
 
 }

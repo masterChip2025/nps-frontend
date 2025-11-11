@@ -81,10 +81,20 @@ a:hover {
 
 /* Estilo para mensajes de error, si los añades */
 .error-message {
-    color: var(--error-color);
-    background-color: #f8d7da;
-    border: 1px solid var(--error-color);
-    padding: 10px;
-    border-radius: 4px;
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px 15px;
+    margin-top: 15px;
     margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

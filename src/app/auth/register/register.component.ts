@@ -12,18 +12,20 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
   userData = { username: '', password: '', name: '', role:'votante' };
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
+    this.errorMessage = 'null';
     this.authService.register(this.userData).subscribe({
       next: (response) => {
         alert('Registro exitoso. Ahora puedes iniciar sesión.');
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        alert('Error en el registro. Inténtalo de nuevo.');
-        console.error(err);
+        this.errorMessage = err.message;
+        // console.error('Error en el registro:', err.message);
       }
     });
   }
