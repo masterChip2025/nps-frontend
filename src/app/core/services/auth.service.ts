@@ -90,4 +90,21 @@ export class AuthService {
     return localStorage.getItem('authToken');
   }
 
+  getUserRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.role || null;
+    } catch (e) {
+      console.error('Error al decodificar el token:', e);
+      return null;
+    }
+  }
+
+  hasUserRespondedSurvey(): boolean {
+    return localStorage.getItem('surveyResponded') === 'true';
+  }
+
 }

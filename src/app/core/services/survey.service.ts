@@ -28,4 +28,8 @@ export class SurveyService
     const body = { calificacionValor };
     return this.http.post(url, body, { headers });
   }
+
+  verificarSiYaRespondio(): Observable<{ yaRespondio: boolean }> {
+    return this.http.get<{ yaRespondio: boolean }>(`${this.apiUrl}/yaRespondio`);
+  }
 }
