@@ -22,21 +22,25 @@
     <div class="stats-overview">
       <div class="stat-card nps-total-score">
         <h3>Net Promoter Score (Global)</h3>
-        <p class="stat-value">65</p>
+        <p class="stat-value">{{ stats.nps }}%</p>
       </div>
 
       <!-- Tarjetas de desglose de clientes -->
       <div class="stat-card promoters">
         <h3>Promotores</h3>
-        <p class="stat-value">45%</p>
+        <p class="stat-value">{{ stats.promotores | number: '1.0-2' }}%</p>
       </div>
       <div class="stat-card neutrals">
         <h3>Neutros</h3>
-        <p class="stat-value">30%</p>
+        <p class="stat-value">{{ stats.neutros | number: '1.0-2' }}%</p>
       </div>
       <div class="stat-card detractors">
         <h3>Detractores</h3>
-        <p class="stat-value">25%</p>
+        <p class="stat-value">{{ stats.detractores | number: '1.0-2' }}%</p>
+      </div>
+      <div class="stat-card total">
+        <h3>Total Encuestados</h3>
+        <p class="stat-value">{{ stats.total }}</p>
       </div>
     </div>
   </ng-container>

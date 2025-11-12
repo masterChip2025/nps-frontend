@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { CREATE_RATING_URL } from '../../shared/constants';
+import { CREATE_RATING_URL, GET_STATISTICS_URL } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import { CREATE_RATING_URL } from '../../shared/constants';
 export class SurveyService
 {
   private apiUrl = CREATE_RATING_URL;
+  private baseUrl = GET_STATISTICS_URL;
 
   constructor(
     private http: HttpClient,
@@ -31,5 +32,9 @@ export class SurveyService
 
   verificarSiYaRespondio(): Observable<{ yaRespondio: boolean }> {
     return this.http.get<{ yaRespondio: boolean }>(`${this.apiUrl}/yaRespondio`);
+  }
+
+  obtenerEstadisticas(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/nps`);
   }
 }

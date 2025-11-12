@@ -15,6 +15,7 @@ export class DashboardComponent {
   userRole: string | null = null;
   hasResponded = false;
   loading = true;
+  stats: any = null;
   constructor
   (
     private authService: AuthService,
@@ -33,6 +34,18 @@ export class DashboardComponent {
         },
         error: (err) => {
           console.error('Error al verificar respuesta:', err);
+          this.loading = false;
+        }
+      });
+    } else if (this.userRole === 'Admin') {
+      this.surveyService.obtenerEstadisticas().subscribe({
+        next: (res) => {
+          console.log('📊 Estadísticas recibidas:', res);
+          this.stats = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error al obtener estadísticas:', err);
           this.loading = false;
         }
       });
