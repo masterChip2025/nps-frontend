@@ -3,6 +3,7 @@ import { AuthService } from '../core/services/auth.service';
 import { SurveyFormComponent } from '../survey-form/survey-form.component';
 import { SurveyService } from '../core/services/survey.service';
 import { CommonModule } from '@angular/common';
+import * as signalR from '@microsoft/signalr';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,9 @@ export class DashboardComponent {
   hasResponded = false;
   loading = true;
   stats: any = null;
+
+  private hubConnection!: signalR.HubConnection;
+
   constructor
   (
     private authService: AuthService,
@@ -61,6 +65,35 @@ export class DashboardComponent {
   handleSurveySubmit(rating: number): void {
     console.log("Calificación recibida en el dashboard:", rating);
     this.hasResponded = true;
-    // this.surveyService.saveResponse(rating).subscribe(...);
+  }
+
+  iniciarConexionSignalR(): void {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('https://localhost:7258/estadisticasHub')
+      .withAutomaticReconnect()
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('✅ Conectado a SignalR'))
+      .catch(err => console.error('❌ Error al conectar a SignalR:', err));
+
+    this.hubConnection.on('ActualizacionEstadisticas', () => {
+      console.log('📊 Actualización recibida desde backend');
+      this.cargarEstadisticas();
+    });
+  }
+
+  cargarEstadisticas(): void {
+    this.surveyService.obtenerEstadisticas().subscribe({
+      next: (res) => (this.stats = res),
+      error: (err) => console.error('Error al obtener estadísticas:', err)
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.hubConnection) {
+      this.hubConnection.stop();
+    }
   }
 }
